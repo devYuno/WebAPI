@@ -18,9 +18,11 @@ public class CreateFanficUseCase(WittPidDbContext ctx, IUserService userService)
             Text = payload.Text
         };
 
+        creator.CreatedFanfics.Add(fanfic);
+
         ctx.Fanfic.Add(fanfic);
         await ctx.SaveChangesAsync();
 
-        return Result<CreateFanficResponse>.Fail("null");
+        return Result<CreateFanficResponse>.Success(new(fanfic.Id));
     }
 }
