@@ -8,5 +8,4 @@ public class FanficList
     public required Guid ListId { get; set; }
     public required List List { get; set; }
     
-    
 }
