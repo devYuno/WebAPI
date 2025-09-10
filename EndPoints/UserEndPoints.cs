@@ -15,7 +15,6 @@ public static class UserEndpoints
             [FromServices] CreateFanficUseCase usecase
         ) =>
         {
-    
             var userIdClaim = http.User.FindFirst(ClaimTypes.NameIdentifier);
             var userId = userIdClaim != null ? Guid.Parse(userIdClaim.Value) : Guid.Empty;
 
