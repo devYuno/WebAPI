@@ -162,3 +162,4 @@ C:\Users\User\Desktop\Bosch\Web API\obj\Debug\net8.0\refint\Web API.dll
 C:\Users\User\Desktop\Bosch\Web API\obj\Debug\net8.0\Web API.pdb
 C:\Users\User\Desktop\Bosch\Web API\obj\Debug\net8.0\Web API.genruntimeconfig.cache
 C:\Users\User\Desktop\Bosch\Web API\obj\Debug\net8.0\ref\Web API.dll
+C:\Users\User\Desktop\Bosch\Web API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

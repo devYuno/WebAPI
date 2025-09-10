@@ -1,13 +1,30 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace WittPid.Models;
 
-public class WittPidDbContext(DbContextOptions options) : DbContext(options)
+public class WittPidDbContext : DbContext
 {
+    public WittPidDbContext(DbContextOptions<WittPidDbContext> options) 
+        : base(options)
+    {
+    }
+
     public DbSet<User> User => Set<User>();
     public DbSet<Fanfic> Fanfic => Set<Fanfic>();
     public DbSet<List> List => Set<List>();
     public DbSet<FanficList> FanficList => Set<FanficList>();
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var conn = Environment.GetEnvironmentVariable("SQL_CONNECTION")
+                       ?? "Server=localhost;Database=WittPid;Trusted_Connection=True;TrustServerCertificate=True;";
+            optionsBuilder.UseSqlServer(conn);
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder model)
     {
@@ -34,5 +51,20 @@ public class WittPidDbContext(DbContextOptions options) : DbContext(options)
             .WithMany(u => u.Lists)
             .HasForeignKey(l => l.CreatorId)
             .OnDelete(DeleteBehavior.NoAction);
+    }
+}
+
+
+
+public class WittPidDbContextFactory : IDesignTimeDbContextFactory<WittPidDbContext>
+{
+    public WittPidDbContext CreateDbContext(string[] args)
+    {
+        var optionsBuilder = new DbContextOptionsBuilder<WittPidDbContext>();
+        var conn = Environment.GetEnvironmentVariable("SQL_CONNECTION")
+                   ?? "Server=localhost;Database=WittPid;Trusted_Connection=True;TrustServerCertificate=True;";
+        optionsBuilder.UseSqlServer(conn);
+
+        return new WittPidDbContext(optionsBuilder.Options);
     }
 }

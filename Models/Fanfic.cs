@@ -2,7 +2,7 @@ namespace WittPid.Models;
 
 public class Fanfic
 {
-    public required Guid Id { get; set; }
+    public Guid Id { get; set; }
     public required string Title { get; set; }
     public required string Text { get; set; }
     public required Guid CreatorId { get; set; }

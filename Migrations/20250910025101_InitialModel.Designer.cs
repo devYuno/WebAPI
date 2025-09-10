@@ -12,7 +12,7 @@ using WittPid.Models;
 namespace Web_API.Migrations
 {
     [DbContext(typeof(WittPidDbContext))]
-    [Migration("20250910003119_InitialModel")]
+    [Migration("20250910025101_InitialModel")]
     partial class InitialModel
     {
         /// <inheritdoc />
